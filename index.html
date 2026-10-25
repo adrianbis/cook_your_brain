@@ -1,0 +1,880 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>How cooked is your brain?</title>
+<meta name="description" content="A 24-question test on everyday habits and AI use. It doesn't punish AI. It checks whether AI is supporting your thinking or replacing it.">
+<meta name="theme-color" content="#1B1033">
+<!-- Link previews: add a 1200x630 image called og.png next to this file and set your real URL below -->
+<meta property="og:title" content="How cooked is your brain?">
+<meta property="og:description" content="24 questions. Not about whether you use AI. About whether it's using up your thinking.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍳</text></svg>">
+<style>
+:root{
+  --ink:#1B1033;
+  --ink-2:#26174A;
+  --ink-3:#33215E;
+  --paper:#FFF6EC;
+  --muted:rgba(255,246,236,.68);
+  --faint:rgba(255,246,236,.14);
+  --cool:#7B8CFF;
+  --pink:#FF5FA2;
+  --orange:#FF8A3D;
+  --butter:#FFD84D;
+  --heat:linear-gradient(90deg,var(--cool) 0%,var(--pink) 38%,var(--orange) 70%,var(--butter) 100%);
+  --display:"Bricolage Grotesque",ui-sans-serif,system-ui,sans-serif;
+  --body:"Instrument Sans",ui-sans-serif,system-ui,sans-serif;
+  --r-lg:28px; --r-md:20px; --r-sm:12px;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{
+  background:var(--ink);
+  color:var(--paper);
+  font-family:var(--body);
+  font-size:17px;
+  line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+  min-height:100vh;
+  overflow-x:hidden;
+}
+/* ambient heat blobs */
+.blobs{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.blob{position:absolute;border-radius:50%;filter:blur(90px);opacity:.42}
+.b1{width:520px;height:520px;background:var(--pink);top:-180px;right:-160px}
+.b2{width:460px;height:460px;background:var(--cool);bottom:-200px;left:-180px;opacity:.35}
+.b3{width:300px;height:300px;background:var(--orange);top:45%;left:60%;opacity:.22}
+main{position:relative;z-index:1;max-width:760px;margin:0 auto;padding:24px 16px 80px}
+.screen{display:none}
+.screen.active{display:block}
+button{font:inherit;color:inherit;cursor:pointer}
+a{color:var(--butter)}
+:focus-visible{outline:3px solid var(--butter);outline-offset:3px;border-radius:10px}
+
+/* ---------- intro ---------- */
+.top{display:flex;justify-content:space-between;align-items:center;font-size:14px;color:var(--muted);margin-bottom:8vh}
+.logo{font-family:var(--display);font-weight:800;color:var(--paper);font-size:18px;letter-spacing:-.01em}
+.friend{
+  background:var(--ink-2);border:1px solid var(--faint);border-radius:var(--r-md);
+  padding:14px 18px;margin-bottom:28px;display:none;font-size:15px
+}
+.friend strong{font-family:var(--display)}
+.hero{position:relative}
+.hero h1{
+  font-family:var(--display);font-weight:800;
+  font-size:clamp(58px,13vw,136px);line-height:.9;letter-spacing:-.045em;
+  margin:0 0 28px;
+  background:var(--heat);background-size:200% 100%;
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  animation:shimmer 7s ease-in-out infinite alternate;
+}
+@keyframes shimmer{from{background-position:0% 50%}to{background-position:100% 50%}}
+.sticker{position:absolute;font-size:clamp(40px,7vw,64px);user-select:none;filter:drop-shadow(0 8px 18px rgba(0,0,0,.35))}
+.s1{top:-34px;right:4%;transform:rotate(14deg)}
+.s2{top:42%;right:-6px;transform:rotate(-12deg)}
+.lede{font-size:clamp(19px,2.6vw,23px);line-height:1.4;max-width:34ch;margin:0 0 36px;color:var(--paper)}
+.lede span{color:var(--muted)}
+.cta{
+  display:inline-flex;align-items:center;gap:10px;
+  background:var(--paper);color:var(--ink);border:0;border-radius:999px;
+  padding:18px 34px;font-family:var(--display);font-weight:800;font-size:20px;letter-spacing:-.01em;
+  box-shadow:0 10px 40px rgba(255,95,162,.35);
+  transition:transform .15s ease, box-shadow .15s ease;
+}
+.cta:hover{transform:translateY(-2px);box-shadow:0 14px 50px rgba(255,95,162,.5)}
+.cta:active{transform:translateY(0)}
+.facts{display:flex;flex-wrap:wrap;gap:10px;margin:28px 0 0;padding:0;list-style:none}
+.facts li{font-size:14px;color:var(--muted);border:1px solid var(--faint);border-radius:999px;padding:7px 14px}
+.how{margin-top:12vh;border-top:1px solid var(--faint);padding-top:28px}
+.how h2{font-family:var(--display);font-size:26px;letter-spacing:-.02em;margin:0 0 14px}
+.how p{color:var(--muted);max-width:60ch;margin:0 0 14px}
+.dims{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:22px 0 0}
+.dim{background:var(--ink-2);border-radius:var(--r-md);padding:16px 18px}
+.dim b{display:block;font-family:var(--display);font-size:18px;margin-bottom:2px}
+.dim span{font-size:14px;color:var(--muted)}
+
+.reading{margin-top:10vh;border-top:1px solid var(--faint);padding-top:28px}
+.reading h2{font-family:var(--display);font-size:26px;letter-spacing:-.02em;margin:0 0 10px}
+.reading > p{color:var(--muted);max-width:60ch;margin:0 0 8px}
+.refgroup h3{font-family:var(--display);font-size:18px;margin:26px 0 10px;color:var(--paper)}
+.refs{list-style:none;padding:0;margin:0;display:grid;gap:10px}
+.refs li{background:var(--ink-2);border-radius:var(--r-sm);padding:14px 16px}
+.refs a{color:var(--paper);font-weight:600;text-decoration:underline;text-decoration-color:rgba(255,216,77,.6);text-underline-offset:3px}
+.refs a:hover{text-decoration-color:var(--butter)}
+.refs .who{display:block;font-size:13.5px;color:var(--muted);margin-top:3px}
+.refs .note{display:block;font-size:14.5px;color:var(--muted);margin-top:6px}
+.refs .alt{font-size:13.5px;margin-left:6px;color:var(--butter);font-weight:500}
+details .refgroup h3{font-size:16px}
+details .refs li{background:var(--ink-3)}
+.cta-small{margin-top:30px;padding:14px 26px;font-size:17px}
+
+/* ---------- quiz ---------- */
+.qtop{display:flex;align-items:center;gap:14px;margin:4px 0 6vh}
+.back{background:none;border:1px solid var(--faint);border-radius:999px;width:42px;height:42px;display:grid;place-items:center;flex:none}
+.back:disabled{opacity:.3;cursor:default}
+.bar{flex:1;height:10px;background:var(--faint);border-radius:999px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--heat);background-size:760px 100%;border-radius:999px;transition:width .35s ease}
+.count{font-size:14px;color:var(--muted);font-variant-numeric:tabular-nums;flex:none;min-width:48px;text-align:right}
+.chip{display:inline-block;font-size:13px;font-weight:600;border-radius:999px;padding:5px 12px;background:var(--ink-3);color:var(--paper);margin-bottom:18px}
+.qtext{font-family:var(--display);font-weight:600;font-size:clamp(28px,5.2vw,44px);line-height:1.08;letter-spacing:-.025em;margin:0 0 30px;max-width:22ch}
+.opts{display:grid;gap:12px}
+.opt{
+  text-align:left;background:var(--ink-2);border:1.5px solid var(--faint);border-radius:var(--r-md);
+  padding:18px 20px;font-size:18px;line-height:1.35;display:flex;gap:14px;align-items:flex-start;
+  transition:transform .12s ease,border-color .12s ease,background .12s ease;
+}
+.opt:hover{border-color:rgba(255,246,236,.45);transform:translateX(3px)}
+.opt kbd{font-family:var(--body);font-size:13px;font-weight:600;color:var(--muted);border:1px solid var(--faint);border-radius:7px;min-width:26px;height:26px;display:grid;place-items:center;flex:none;margin-top:1px}
+.opt.picked{background:var(--heat);background-size:100% 100%;color:var(--ink);border-color:transparent;font-weight:600}
+.opt.picked kbd{color:var(--ink);border-color:rgba(27,16,51,.3)}
+.twist{
+  margin-top:26px;background:var(--paper);color:var(--ink);border-radius:var(--r-lg);padding:22px 24px;display:none;
+  transform-origin:top left;
+}
+.twist.show{display:block;animation:pop .35s cubic-bezier(.2,.9,.3,1.3)}
+@keyframes pop{from{transform:scale(.94) rotate(-1deg);opacity:0}to{transform:none;opacity:1}}
+.twist h3{font-family:var(--display);font-size:22px;margin:0 0 6px;letter-spacing:-.01em}
+.twist p{margin:0 0 16px;font-size:16px}
+.twist cite{font-style:normal;font-size:13px;opacity:.7}
+.twist button{background:var(--ink);color:var(--paper);border:0;border-radius:999px;padding:12px 22px;font-weight:600}
+
+/* ---------- loading ---------- */
+.cooking{min-height:70vh;display:grid;place-items:center;text-align:center}
+.pan{font-size:96px;display:inline-block;animation:sizzle .5s ease-in-out infinite alternate}
+@keyframes sizzle{from{transform:rotate(-8deg)}to{transform:rotate(8deg) translateY(-6px)}}
+.cooking p{font-family:var(--display);font-size:24px;margin-top:16px}
+
+/* ---------- results ---------- */
+.rhead{text-align:center;padding-top:2vh}
+.badge{
+  width:132px;height:132px;border-radius:50%;margin:0 auto 18px;display:grid;place-items:center;font-size:68px;
+  background:var(--heat);box-shadow:0 18px 60px rgba(255,95,162,.4);
+  transform:rotate(-6deg);
+}
+.kicker{color:var(--muted);font-size:15px;margin:0 0 4px}
+.rname{font-family:var(--display);font-weight:800;font-size:clamp(46px,10vw,88px);line-height:.95;letter-spacing:-.04em;margin:0 0 12px}
+.tag{font-size:clamp(18px,2.6vw,21px);margin:0 auto;max-width:30ch;color:var(--paper)}
+.gauge{background:var(--ink-2);border-radius:var(--r-lg);padding:28px 24px 22px;margin:36px 0 18px}
+.pct{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.pct b{
+  font-family:var(--display);font-weight:800;font-size:clamp(76px,16vw,124px);line-height:.9;letter-spacing:-.05em;
+  background:var(--heat);-webkit-background-clip:text;background-clip:text;color:transparent;font-variant-numeric:tabular-nums;
+}
+.pct span{font-family:var(--display);font-size:22px;font-weight:600}
+.thermo{position:relative;height:16px;border-radius:999px;background:var(--heat);margin:22px 0 10px}
+.pin{position:absolute;top:50%;width:30px;height:30px;border-radius:50%;background:var(--paper);border:5px solid var(--ink);transform:translate(-50%,-50%);left:0;transition:left 1.1s cubic-bezier(.2,.8,.2,1);box-shadow:0 4px 14px rgba(0,0,0,.4)}
+.ticks{display:flex;justify-content:space-between;font-size:12.5px;color:var(--muted)}
+.disclaim{font-size:13.5px;color:var(--muted);margin:14px 0 0}
+.desc{font-size:19px;line-height:1.5;margin:26px 0 0}
+section.block{margin-top:52px}
+section.block h2{font-family:var(--display);font-size:clamp(26px,4.4vw,34px);letter-spacing:-.025em;margin:0 0 6px;line-height:1.1}
+section.block .sub{color:var(--muted);margin:0 0 20px;font-size:15.5px}
+.rows{display:grid;gap:16px}
+.row-top{display:flex;justify-content:space-between;font-weight:600;margin-bottom:7px}
+.row-top em{font-style:normal;color:var(--muted);font-weight:500;font-variant-numeric:tabular-nums}
+.track{height:12px;border-radius:999px;background:var(--faint);overflow:hidden}
+.track i{display:block;height:100%;width:0;border-radius:999px;transition:width 1s cubic-bezier(.2,.8,.2,1)}
+.row small{display:block;color:var(--muted);font-size:13.5px;margin-top:6px}
+.recs{display:grid;gap:14px}
+.rec{background:var(--ink-2);border-radius:var(--r-md);padding:20px 22px;border-left:5px solid var(--pink)}
+.rec h3{font-family:var(--display);font-size:21px;margin:0 0 6px;letter-spacing:-.01em}
+.rec p{margin:0 0 10px}
+.rec .why{font-size:14.5px;color:var(--muted);margin:0}
+.keep{background:var(--paper);color:var(--ink);border-radius:var(--r-md);padding:20px 22px;margin-top:14px}
+.keep h3{font-family:var(--display);font-size:20px;margin:0 0 4px}
+.keep p{margin:0}
+.good{list-style:none;padding:0;margin:0;display:grid;gap:10px}
+.good li{display:flex;gap:12px;align-items:flex-start;background:var(--ink-2);border-radius:var(--r-sm);padding:14px 16px}
+.good li span:first-child{font-size:22px;line-height:1.1}
+.share{background:var(--heat);color:var(--ink);border-radius:var(--r-lg);padding:28px 24px;text-align:center}
+.share h2{color:var(--ink)}
+.share p{margin:0 0 18px}
+.btns{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.btn{border:0;border-radius:999px;padding:14px 22px;font-weight:600;font-size:16px;background:var(--ink);color:var(--paper)}
+.btn.ghost{background:rgba(27,16,51,.12);color:var(--ink)}
+.toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%) translateY(30px);background:var(--paper);color:var(--ink);padding:12px 20px;border-radius:999px;font-weight:600;opacity:0;transition:all .25s ease;z-index:10;pointer-events:none}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+details{background:var(--ink-2);border-radius:var(--r-md);padding:4px 20px;margin-top:12px}
+summary{cursor:pointer;font-weight:600;padding:14px 0;list-style:none}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";float:right;font-size:22px;line-height:1}
+details[open] summary::after{content:"–"}
+details p,details li{color:var(--muted);font-size:15px}
+details ol{padding-left:20px;margin:0 0 18px}
+details li{margin-bottom:8px}
+.again{display:block;margin:44px auto 0;background:none;border:1.5px solid var(--faint);border-radius:999px;padding:14px 26px;font-weight:600}
+footer{color:var(--muted);font-size:13.5px;text-align:center;margin-top:60px}
+
+@media (max-width:520px){
+  body{font-size:16px}
+  .top{margin-bottom:6vh}
+  .opt{font-size:17px;padding:16px}
+  .opt kbd{display:none}
+  .s2{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+<div class="blobs" aria-hidden="true"><div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div></div>
+
+<main>
+  <!-- ================= INTRO ================= -->
+  <section id="intro" class="screen active" aria-labelledby="h1">
+    <div class="top"><span class="logo">🍳 brain kitchen</span><span>24 questions, about 4 min</span></div>
+    <div class="friend" id="friend"></div>
+    <div class="hero">
+      <span class="sticker s1" aria-hidden="true">🧠</span>
+      <span class="sticker s2" aria-hidden="true">🔥</span>
+      <h1 id="h1">How cooked is your brain?</h1>
+      <p class="lede">A test of your everyday habits and how you use AI. <span>Not whether you use it. Whether it's quietly using up your thinking.</span></p>
+      <button class="cta" id="start">Start the test</button>
+      <ul class="facts">
+        <li>No sign-up</li>
+        <li>Nothing leaves your device</li>
+        <li>Based on published research</li>
+      </ul>
+    </div>
+
+    <div class="how">
+      <h2>What it measures</h2>
+      <p>Researchers increasingly find that what matters is how you use AI, not how much. Letting it do your thinking is linked to weaker independent thinking. Using it to support your thinking, or to take over tedious stuff you'd never learn from anyway, isn't. This test rewards the second kind.</p>
+      <p>It also looks past AI, at the everyday habits linked to long-term brain health: learning new things, focus, movement and people.</p>
+      <div class="dims" id="dimlist"></div>
+    </div>
+
+    <div class="reading" id="reading">
+      <h2>Read the research</h2>
+      <p>Everything in this test is built on the work below. Most of the AI research is new, and several studies are small or correlational, so the notes say how much weight each one can carry.</p>
+      <div id="refsIntro"></div>
+      <button class="cta cta-small" id="start2">Start the test</button>
+    </div>
+  </section>
+
+  <!-- ================= QUIZ ================= -->
+  <section id="quiz" class="screen" aria-live="polite">
+    <div class="qtop">
+      <button class="back" id="back" aria-label="Previous question">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <div class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="24" aria-valuenow="0" id="bar"><i></i></div>
+      <span class="count" id="count">1/24</span>
+    </div>
+    <span class="chip" id="chip"></span>
+    <h2 class="qtext" id="qtext"></h2>
+    <div class="opts" id="opts"></div>
+    <div class="twist" id="twist" role="note">
+      <h3>Plot twist</h3>
+      <p id="twistText"></p>
+      <button id="twistNext">Next question</button>
+    </div>
+  </section>
+
+  <!-- ================= COOKING ================= -->
+  <section id="cooking" class="screen">
+    <div class="cooking"><div><span class="pan" aria-hidden="true">🍳</span><p id="cookMsg">Preheating your results</p></div></div>
+  </section>
+
+  <!-- ================= RESULTS ================= -->
+  <section id="results" class="screen">
+    <div class="rhead">
+      <div class="badge" id="rEmoji" aria-hidden="true"></div>
+      <p class="kicker">You're</p>
+      <h1 class="rname" id="rName"></h1>
+      <p class="tag" id="rTag"></p>
+    </div>
+
+    <div class="gauge">
+      <div class="pct"><b id="rPct">0%</b><span>cooked by 2036</span></div>
+      <div class="thermo" aria-hidden="true"><div class="pin" id="pin"></div></div>
+      <div class="ticks" aria-hidden="true"><span>Fresh</span><span>Toasted</span><span>Medium</span><span>Well done</span><span>Charcoal</span></div>
+      <p class="disclaim">The 2036 bit is a joke. No study can forecast your brain in ten years. The score reflects how your current habits line up with what research links to sharper or duller thinking.</p>
+    </div>
+    <p class="desc" id="rDesc"></p>
+
+    <section class="block">
+      <h2>Your breakdown</h2>
+      <p class="sub">Higher is better for your brain in every row.</p>
+      <div class="rows" id="rows"></div>
+    </section>
+
+    <section class="block">
+      <h2>Three things to try this week</h2>
+      <p class="sub" id="recsSub">Picked from your lowest areas. Small on purpose.</p>
+      <div class="recs" id="recs"></div>
+      <div class="keep" id="keep"></div>
+    </section>
+
+    <section class="block">
+      <h2>AI that's actually good for your brain</h2>
+      <p class="sub" id="goodIntro"></p>
+      <ul class="good">
+        <li><span aria-hidden="true">🧮</span><span>Math and money stuff beyond you. Let it calculate, then check the answer is roughly the size you expected.</span></li>
+        <li><span aria-hidden="true">✈️</span><span>Comparing options you'd never tabulate yourself: flights, plans, phone contracts. You still make the call.</span></li>
+        <li><span aria-hidden="true">📎</span><span>Admin and formatting. Hand it off and spend the attention on something that stretches you.</span></li>
+        <li><span aria-hidden="true">🎓</span><span>A tutor, not an answer key. Ask it to quiz you, give hints, or explain why.</span></li>
+        <li><span aria-hidden="true">🥊</span><span>A sparring partner after you've formed your own view. Ask it to argue the other side.</span></li>
+      </ul>
+    </section>
+
+    <section class="block share">
+      <h2>Share your doneness</h2>
+      <p>Send it to the friend who asks ChatGPT what to text back.</p>
+      <div class="btns">
+        <button class="btn" id="saveCard">Save result card</button>
+        <button class="btn" id="shareBtn">Share</button>
+        <button class="btn ghost" id="copyBtn">Copy link</button>
+      </div>
+    </section>
+
+    <section class="block">
+      <h2>The fine print</h2>
+      <details>
+        <summary>What this test is, and isn't</summary>
+        <p>This is a self-reflection quiz, not a validated psychological instrument or a medical test. Questions and scoring are built from published research, but the test itself hasn't been validated. Most of the AI research is recent, many studies are correlational, and some are small or not yet peer reviewed. Treat your result as a mirror, not a diagnosis.</p>
+        <p>If you're genuinely worried about your memory or thinking, talk to a doctor. That's a different conversation from this quiz.</p>
+      </details>
+      <details>
+        <summary>How scoring works</summary>
+        <p>Each question scores one of six areas from 0 to 100. Your "cooked" percentage is a weighted average of those areas, flipped so that higher means more cooked. Thinking first, fact-checking and brain reserve count most. Smart delegation counts least, since doing boring tasks by hand costs you time more than brain. Your type comes from your pattern across areas, not your total alone. Answers like "I don't use AI" are left out of the scoring rather than counted against you.</p>
+      </details>
+      <details>
+        <summary>The research behind it</summary>
+        <div id="refsResults"></div>
+      </details>
+    </section>
+
+    <button class="again" id="again">Take it again</button>
+  </section>
+
+  <footer>Made as a small project on human enfeeblement. Your answers never leave this page.</footer>
+</main>
+
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+/*LOGIC-START*/
+const DIMS = {
+  think:    {name:"Thinking first",      blurb:"Do you think before you prompt?", w:1.5, color:"#FF5FA2"},
+  check:    {name:"Fact-checking",       blurb:"Do you check what the machine tells you?", w:1.2, color:"#FF8A3D"},
+  memory:   {name:"Memory & wayfinding", blurb:"Do you still build your own maps?", w:0.8, color:"#7B8CFF"},
+  delegate: {name:"Smart delegation",    blurb:"Do you hand off the right stuff?", w:0.6, color:"#FFD84D"},
+  reserve:  {name:"Brain reserve",       blurb:"New skills, focus, movement, people.", w:1.3, color:"#9BE38B"},
+  aware:    {name:"Self-awareness",      blurb:"Do you notice what you're handing over?", w:1.1, color:"#C59BFF"}
+};
+
+// score: 0 (cooking you) to 4 (great for your brain); null = not applicable, excluded from scoring
+const QUESTIONS = [
+  {d:"think", q:"You owe a friend an apology text. You bailed. Again.", o:[
+    ["AI writes it, I hit send",0],
+    ["AI drafts it, I rewrite it in my own words",2],
+    ["I write it, then maybe ask AI if the tone's off",4],
+    ["I write it myself, typos and all",4]]},
+  {d:"reserve", q:"When did you last start learning something new and hard? An instrument, a language, a sport, a craft.", o:[
+    ["I'm in the middle of it right now",4],
+    ["Sometime this year",3],
+    ["Does a Duolingo streak count?",2],
+    ["A few years ago, honestly",1]],
+    fact:"In the Synapse Project, older adults who spent three months learning demanding new skills like digital photography or quilting improved their memory more than those doing easy or purely social activities.", cite:"Park et al., Psychological Science, 2014"},
+  {d:"delegate", q:"You're comparing six flights with different layovers, bag fees and prices.", o:[
+    ["Spreadsheet by hand. Two hours, gone.",1],
+    ["Have AI or a tool line them up, then I pick",4],
+    ["Book the first one and pray",1],
+    ["Let AI pick and book it for me",2]]},
+  {d:"check", q:"AI gives you a confident answer with a very specific statistic.", o:[
+    ["Use it. It sounded sure.",0],
+    ["Ask it \"are you sure?\"",1],
+    ["Check another source if it actually matters",4],
+    ["I don't use AI for facts",null]]},
+  {d:"memory", q:"You're heading somewhere you've been at least three times before.", o:[
+    ["Maps on, eyes on the blue dot, every time",0],
+    ["Maps on for traffic, but I know the way",3],
+    ["No maps. I've got this.",4]]},
+  {d:"aware", q:"A problem gets hard. How long before you ask AI or Google?", o:[
+    ["Instantly. Why suffer?",0],
+    ["I give it a real go first",4],
+    ["Depends. If I want to learn it, I struggle. If not, I hand it off.",4],
+    ["Never. I'd rather suffer forever.",2]]},
+
+  {d:"think", q:"A big decision lands: a job offer, a move, a whole situationship.", o:[
+    ["I ask AI what I should do, and mostly do that",0],
+    ["I think it through first, then use AI as a sounding board",4],
+    ["Journal, overthink, call my people",4],
+    ["Flip a coin and hope",1]]},
+  {d:"reserve", q:"How often do you get through something long that needs focus? A book, a long article, a film with your phone in another room.", o:[
+    ["Most days",4],
+    ["Most weeks",3],
+    ["Rarely",1],
+    ["My attention span is nine seconds and a sound effect",0]]},
+  {d:"delegate", q:"Math that's beyond you: comparing mortgage options, or splitting a messy group bill with tax and tip.", o:[
+    ["Use AI or a calculator, then sanity-check the result",4],
+    ["Wrestle with it by hand for an hour",1],
+    ["Ballpark it and hope nobody notices",0],
+    ["Use AI and trust whatever it says",2]],
+    fact:"Handing off what's beyond you isn't cheating. A 2026 study separated letting AI do your thinking from using it to support your thinking. Only the first was linked to worse outcomes.", cite:"Zhu et al., Frontiers in Psychology, 2026"},
+  {d:"check", q:"There's an AI summary of an email thread or article you didn't read.", o:[
+    ["I act on it like I read the whole thing",0],
+    ["I skim the original for the bits that matter",3],
+    ["I read the original when it's important",4],
+    ["I don't use AI summaries",null]]},
+  {d:"memory", q:"First day in a new city.", o:[
+    ["Follow the blue dot. Couldn't point to my hotel after.",0],
+    ["Check the map, then try to navigate by landmarks",4],
+    ["Wander, get lost, call it an adventure",3]]},
+  {d:"aware", q:"After AI helps you with something, could you do it again without it?", o:[
+    ["Usually, yes",4],
+    ["Sometimes",2],
+    ["Honestly, no",0],
+    ["I don't use AI much",null]]},
+
+  {d:"think", q:"You need ideas: a project, a gift, a party theme.", o:[
+    ["Straight to AI for a list, then I pick one",1],
+    ["Brainstorm my own first, then let AI add to it or poke holes",4],
+    ["My brain only, thanks",3],
+    ["AI picks, AI plans, I show up",0]]},
+  {d:"reserve", q:"Getting your heart rate up. Brisk walks count. Dancing counts.", o:[
+    ["Three or more times a week",4],
+    ["Once or twice a week",3],
+    ["Now and then",2],
+    ["Running for the bus is my cardio",0]]},
+  {d:"delegate", q:"You're learning something new, like a language or a tricky recipe.", o:[
+    ["I get AI to quiz me or explain why, and I do the practice",4],
+    ["I ask AI for the answer and follow it step by step",1],
+    ["Books, videos, classes. No AI.",3]],
+    fact:"In a randomized trial, developers learning a new coding library with AI scored 17% lower on a quiz afterwards. The ones who asked AI conceptual questions, instead of just taking its code, kept much more.", cite:"Anthropic, 2026"},
+  {d:"check", q:"When did you last catch AI being wrong?", o:[
+    ["This week",4],
+    ["This month",3],
+    ["Can't remember. It's usually right.",0],
+    ["I barely use AI",null]],
+    fact:"In a survey of 319 knowledge workers, people who trusted AI more reported doing less critical thinking. People confident in their own skills did more.", cite:"Lee et al., CHI 2025"},
+  {d:"memory", q:"You read something fascinating last week. Today you…", o:[
+    ["Can explain the gist to a friend",4],
+    ["Know I saved it somewhere",1],
+    ["Remember it existed, not what it said",1],
+    ["Could ask AI to explain it again",1]]},
+  {d:"aware", q:"AI disappears for a month, starting tomorrow. You'd be…", o:[
+    ["Fine. Mildly inconvenienced.",4],
+    ["Slower, but I'd manage",3],
+    ["Struggling at work or school",1],
+    ["Completely lost. Who even am I?",0]]},
+
+  {d:"think", q:"Someone at dinner asks something nobody knows. Why is the sky blue?", o:[
+    ["Phones out, someone reads the AI answer aloud",1],
+    ["We take wild guesses first, then check",4],
+    ["Shrug and move on",2]]},
+  {d:"reserve", q:"Real-time conversations with humans. In person or a call, not just texting.", o:[
+    ["Most days",4],
+    ["A few times a week",3],
+    ["About once a week",1],
+    ["Honestly, my most regular chat is with an AI",0]]},
+  {d:"delegate", q:"Boring admin: reformatting a document, or a standard complaint email to your airline.", o:[
+    ["AI does it, I give it a quick read",4],
+    ["All by hand. It builds character.",1],
+    ["Avoid it for three weeks",0]]},
+  {d:"check", q:"A viral clip makes a claim that perfectly confirms what you already think.", o:[
+    ["Share it, obviously",0],
+    ["Feel smug, don't share",1],
+    ["Check whether it's real, or AI-generated, before believing it",4],
+    ["Ask a chatbot if it's true and take its word",2]]},
+  {d:"memory", q:"Birthdays, appointments, your to-do list.", o:[
+    ["Calendar or reminders, so my head is free for other things",4],
+    ["I keep it all in my head and drop a few balls",2],
+    ["Someone else remembers for me",1],
+    ["An AI assistant handles it and I check in",4]],
+    fact:"Not all offloading is bad. Saving information outside your head can free up memory for learning new things. Offload the storage, keep the thinking.", cite:"Storm & Stone, Psychological Science, 2015"},
+  {d:"aware", q:"Do you ever do things the hard way on purpose, just to keep the skill?", o:[
+    ["Yes. Mental math, first drafts, no-GPS days.",4],
+    ["Sometimes, by accident",2],
+    ["No. Why would I?",0]]}
+];
+
+const TYPES = {
+  "head-chef": {emoji:"👩‍🍳", name:"The Head Chef", tag:"AI is your sous-chef. You run the kitchen.",
+    desc:"You think first, hand off the chopping, and taste everything before it leaves the pass. You use AI where it saves real effort and keep the parts that make you sharper. That's the pattern the research keeps pointing to: the tool supports your thinking instead of replacing it."},
+  "artisan": {emoji:"🫓", name:"The Artisan", tag:"Hand-rolled everything. Even the boring stuff.",
+    desc:"Your brain is in good shape. Your calendar, less so. You do things the hard way even when the hard way isn't teaching you anything, like tabulating flights by hand or wrestling with math you'll never need again. Hand that part off and spend the time on something that actually stretches you."},
+  "line-cook": {emoji:"🍳", name:"The Line Cook", tag:"Solid in the kitchen. A couple of things left on the heat.",
+    desc:"Mostly good habits with a few soft spots. You think for yourself most of the time, but some tasks have slid onto autopilot without you ever deciding they should. Your lowest areas below are the easiest wins."},
+  "slow-simmer": {emoji:"🫕", name:"The Slow Simmer", tag:"Nothing's burning. You just haven't checked the pot in a while.",
+    desc:"This is how enfeeblement actually works: no dramatic moment, just small handoffs you stop noticing. Your habits aren't bad, but you're not keeping track of which skills you're keeping and which you're quietly letting go."},
+  "couch-potato": {emoji:"🥔", name:"The Couch Potato", tag:"It's not the AI. It's the lack of workout.",
+    desc:"Your AI habits might be fine, but your brain isn't getting much that's new and hard to chew on. Long-term brain health research is less about avoiding tools and more about novelty, focus, movement and people. Good news: those are the most fixable things on this list."},
+  "yes-chef": {emoji:"🫡", name:"The Yes Chef", tag:"Whatever the AI says goes straight on the plate.",
+    desc:"You do plenty of your own thinking, but when AI hands you something, it ships. Sounding confident isn't the same as being right, and the more you trust the tool, the less checking people tend to do. The fix is small and kind of fun: start catching it out."},
+  "takeout": {emoji:"🥡", name:"The Takeout Regular", tag:"Why cook when you can order your thinking in?",
+    desc:"A lot of your thinking arrives pre-made: plans, messages, decisions, answers. It's fast and convenient, and it's the pattern most linked to weaker independent thinking over time. You don't need to quit. Start by cooking one meal a day yourself."}
+};
+
+const RECS = {
+  think: [
+    {t:"Think first, prompt second", a:"Before you open a chat, spend five minutes on your own rough answer, draft or plan. Then bring in AI to improve it.", w:"In MIT's essay study, people who wrote unaided first and then got AI showed more brain engagement than those who started with AI. Small, not yet peer reviewed, but it matches decades of work showing that what you generate yourself sticks."},
+    {t:"Ask for hints, not answers", a:"Add \"don't give me the answer, give me a hint\" to your prompt when you're working something out.", w:"In a trial with nearly 1,000 students, a ChatGPT version that gave hints instead of answers largely avoided the learning loss seen with the regular version (Bastani et al., 2025)."}
+  ],
+  check: [
+    {t:"The two-source rule", a:"For anything that matters (health, money, something you'll repeat to others), check one source that isn't the AI.", w:"People who trust AI more report doing less critical thinking when they use it (Lee et al., 2025). A quick second check keeps that habit alive."},
+    {t:"Catch it out once a week", a:"Ask \"what might be wrong with this?\" after an answer you rely on. Keep a little tally of what you catch.", w:"Fluent answers feel correct. Actively looking for errors is how you stay the editor rather than the audience."}
+  ],
+  memory: [
+    {t:"GPS there, brain back", a:"Use maps on the way somewhere, then try the way back without them.", w:"This is the tip from Bohbot, whose study linked heavy GPS use to steeper decline in spatial memory over three years (Dahmani & Bohbot, 2020). Getting a little lost is part of the workout."},
+    {t:"Tell someone one thing", a:"Once a day, explain something you read or learned to someone, out loud, without looking it up.", w:"Pulling information back out of your head is one of the best-replicated ways to keep it there (Roediger & Karpicke, 2006)."}
+  ],
+  delegate: [
+    {t:"Hand off the boring bits", a:"Pick one tedious task this week (formatting, a comparison table, a template email) and let AI do the first pass.", w:"Effort that's just friction doesn't build skill (cognitive load theory). Using AI to support your work, rather than replace your thinking, wasn't linked to the downsides (Zhu et al., 2026)."},
+    {t:"Turn AI into a tutor", a:"Next time you learn something, ask it to quiz you or explain why, instead of just giving you the result.", w:"In Anthropic's 2026 trial, people who asked AI conceptual questions kept far more of what they learned than people who just took its output."}
+  ],
+  reserve: [
+    {t:"Start one hard, new thing", a:"Pick something you're bad at and do 20 minutes of it a few times this week. An instrument, a language, a craft.", w:"Learning demanding new skills improved memory more than easy or social activities in the Synapse Project (Park et al., 2014)."},
+    {t:"Move, and see people", a:"Turn one call into a walk. Or one text thread into coffee.", w:"Physical inactivity and social isolation are both among the 14 modifiable dementia risk factors in the 2024 Lancet Commission, which estimates around 45% of cases could in theory be prevented or delayed."}
+  ],
+  aware: [
+    {t:"Decide before you delegate", a:"Before you ask AI, give yourself one second: do I want to learn this, or just get it done? If learn, struggle for ten minutes first.", w:"Effort that feels hard in the moment often makes learning stick (\"desirable difficulties\"). It only works if you choose it on purpose."},
+    {t:"The closed-laptop check", a:"After AI helps you, close it and try to redo or explain the thing yourself.", w:"AI users in one study did better on reasoning tasks but overestimated how well they did, and people with more AI know-how were worse at judging themselves (Fernandes et al., 2026). This check recalibrates you."}
+  ]
+};
+
+const KEEP = {
+  think:"You think before you prompt. That's the single habit most of this research protects.",
+  check:"You check what the machine tells you. Stay the editor, not the audience.",
+  memory:"You still build your own mental maps. Your hippocampus thanks you.",
+  delegate:"You hand off the right things. Less friction, more brain left for what matters.",
+  reserve:"You keep feeding your brain new, hard stuff, plus movement and people. That's the long game.",
+  aware:"You notice what you're handing over. That awareness is what keeps the rest from sliding."
+};
+
+function scoreAnswers(answers){
+  // answers: array of option indexes (or undefined)
+  const sum={}, max={};
+  Object.keys(DIMS).forEach(k=>{sum[k]=0;max[k]=0});
+  QUESTIONS.forEach((q,i)=>{
+    const a=answers[i]; if(a==null) return;
+    const v=q.o[a][1]; if(v===null) return;
+    sum[q.d]+=v; max[q.d]+=4;
+  });
+  const s={};
+  Object.keys(DIMS).forEach(k=>{ s[k]= max[k] ? Math.round(sum[k]/max[k]*100) : 70; });
+  let wsum=0, wtot=0;
+  Object.keys(DIMS).forEach(k=>{wsum+=DIMS[k].w*s[k]; wtot+=DIMS[k].w});
+  const health=wsum/wtot;
+  const cooked=Math.max(2,Math.min(98,Math.round(100-health)));
+  return {s,cooked,type:pickType(s,cooked)};
+}
+
+function pickType(s,cooked){
+  const avg=(s.think+s.check+s.delegate+s.aware)/4;
+  if(avg>=70 && Math.min(s.think,s.check,s.delegate,s.aware)>=55 && s.reserve>=45) return "head-chef";
+  if(s.think<40 && (s.check<50 || s.aware<45)) return "takeout";
+  if(s.check<40) return "yes-chef";
+  if(s.delegate<45 && s.think>=60 && s.aware>=55) return "artisan";
+  if(s.reserve<45) return "couch-potato";
+  if(s.aware<55 || cooked>=42) return "slow-simmer";
+  return "line-cook";
+}
+
+function pickRecs(s){
+  const order=Object.keys(s).sort((a,b)=>s[a]-s[b]);
+  const out=[];
+  // lowest dimension gets its two recs if it's well below the next; otherwise one each from the lowest three
+  const gap=s[order[1]]-s[order[0]];
+  if(gap>=25){ out.push(RECS[order[0]][0],RECS[order[0]][1],RECS[order[1]][0]); }
+  else { out.push(RECS[order[0]][0],RECS[order[1]][0],RECS[order[2]][0]); }
+  return out.map((r,i)=>({...r}));
+}
+/*LOGIC-END*/
+
+// ================= UI =================
+const $=id=>document.getElementById(id);
+const screens=["intro","quiz","cooking","results"];
+let answers=[], idx=0, result=null, locked=false;
+
+function show(name){
+  screens.forEach(s=>$(s).classList.toggle("active",s===name));
+  window.scrollTo({top:0,behavior:"instant"});
+}
+
+// ================= REFERENCES (one list, shown on start + results pages) =================
+const REFS = [
+  {g:"AI and how we think", items:[
+    {who:"Gerlich (2025). Societies", t:"AI tools in society: Impacts on cognitive offloading and the future of critical thinking", u:"https://doi.org/10.3390/soc15010006",
+     n:"666 participants. Heavier AI use went with lower critical-thinking scores, largely explained by cognitive offloading. Correlational."},
+    {who:"Lee et al. (2025). CHI '25", t:"The impact of generative AI on critical thinking: Self-reported reductions in cognitive effort and confidence effects", u:"https://doi.org/10.1145/3706598.3713778",
+     n:"319 knowledge workers. More confidence in AI went with less critical thinking; more self-confidence went with more."},
+    {who:"Zhu et al. (2026). Frontiers in Psychology", t:"Not all cognitive offloading is equal: Distinguishing dependent and autonomous offloading to generative AI", u:"https://doi.org/10.3389/fpsyg.2026.1878629",
+     n:"Letting AI do the thinking and using it as a scaffold had different correlates. The basis for rewarding good AI use."},
+    {who:"Bastani et al. (2025). PNAS", t:"Generative AI without guardrails can harm learning: Evidence from high school mathematics", u:"https://doi.org/10.1073/pnas.2422633122",
+     n:"Nearly 1,000 students. Unrestricted ChatGPT helped practice but hurt later unaided performance; a hint-giving tutor largely avoided this."},
+    {who:"Anthropic (2026)", t:"How AI assistance impacts the formation of coding skills", u:"https://www.anthropic.com/research/AI-assistance-coding-skills",
+     n:"Randomized trial. Developers learning a new library with AI scored 17% lower on a follow-up quiz; those asking conceptual questions kept more. Small and short-term."},
+    {who:"Fernandes et al. (2026). Computers in Human Behavior", t:"AI makes you smarter but none the wiser: The disconnect between performance and metacognition", u:"https://doi.org/10.1016/j.chb.2025.108779",
+     n:"AI users did better on reasoning tasks but overestimated how well they did. Higher AI literacy went with worse self-assessment."},
+    {who:"Kosmyna et al. (2025). arXiv preprint", t:"Your brain on ChatGPT: Accumulation of cognitive debt when using an AI assistant for essay writing", u:"https://arxiv.org/abs/2506.08872",
+     n:"EEG study, 54 participants, not yet peer reviewed. Weakest brain connectivity in the AI group; writing unaided first, then using AI, looked better."}
+  ]},
+  {g:"Memory and offloading", items:[
+    {who:"Dahmani & Bohbot (2020). Scientific Reports", t:"Habitual use of GPS negatively impacts spatial memory during self-guided navigation", u:"https://doi.org/10.1038/s41598-020-62877-0",
+     n:"More GPS use went with worse spatial memory, and with steeper decline over three years. Small longitudinal sample."},
+    {who:"Storm & Stone (2015). Psychological Science", t:"Saving-enhanced memory: The benefits of saving on the learning and remembering of new information", u:"https://doi.org/10.1177/0956797614559285",
+     n:"Saving information outside your head freed memory for new information. Why reminders and calendars score well here."},
+    {who:"Risko & Gilbert (2016). Trends in Cognitive Sciences", t:"Cognitive offloading", u:"https://doi.org/10.1016/j.tics.2016.07.002",
+     n:"Review of when offloading helps and when it costs."},
+    {who:"Roediger & Karpicke (2006). Psychological Science", t:"Test-enhanced learning: Taking memory tests improves long-term retention", u:"https://doi.org/10.1111/j.1467-9280.2006.01693.x",
+     n:"Pulling information back out of memory beats re-reading it."},
+    {who:"Sweller (1988). Cognitive Science", t:"Cognitive load during problem solving: Effects on learning", u:"https://doi.org/10.1207/s15516709cog1202_4",
+     n:"Foundation for separating effort that builds skill from effort that is just friction."}
+  ]},
+  {g:"Long-term brain health", items:[
+    {who:"Livingston et al. (2024). The Lancet", t:"Dementia prevention, intervention, and care: 2024 report of the Lancet standing Commission", u:"https://doi.org/10.1016/S0140-6736(24)01296-0",
+     n:"14 modifiable risk factors, including physical inactivity, social isolation and less education. Addressing them could in theory prevent or delay about 45% of cases."},
+    {who:"Park et al. (2014). Psychological Science", t:"The impact of sustained engagement on cognitive function in older adults: The Synapse Project", u:"https://doi.org/10.1177/0956797613499592",
+     n:"Learning demanding new skills improved memory more than easy or purely social activities."}
+  ]},
+  {g:"Bigger picture and similar tools", items:[
+    {who:"Hendrycks, Mazeika & Woodside (2023). arXiv", t:"An overview of catastrophic AI risks", u:"https://arxiv.org/abs/2306.12001",
+     n:"Discusses enfeeblement: people gradually losing abilities by handing them over to machines."},
+    {who:"Ul Alam (2026). arXiv", t:"PAUSE: A privacy-preserving self-reflection tool for AI-associated cognitive offloading", u:"https://arxiv.org/abs/2609.13155",
+     alt:{label:"Try PAUSE", u:"https://anondo1969.github.io/pause/"},
+     n:"A more in-depth, research-style self-check on how your AI use relates to offloading. A good next step after this quiz."}
+  ]}
+];
+
+function esc(t){return String(t).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
+function renderRefs(el){
+  el.innerHTML = REFS.map(grp=>`<div class="refgroup"><h3>${esc(grp.g)}</h3><ul class="refs">${
+    grp.items.map(r=>`<li><a href="${esc(r.u)}" target="_blank" rel="noopener">${esc(r.t)}</a>${
+      r.alt?` <a class="alt" href="${esc(r.alt.u)}" target="_blank" rel="noopener">${esc(r.alt.label)}</a>`:""
+    }<span class="who">${esc(r.who)}</span><span class="note">${esc(r.n)}</span></li>`).join("")
+  }</ul></div>`).join("");
+}
+renderRefs($("refsIntro")); renderRefs($("refsResults"));
+
+// intro dimension list
+$("dimlist").innerHTML=Object.values(DIMS).map(d=>`<div class="dim"><b>${d.name}</b><span>${d.blurb}</span></div>`).join("");
+
+// friend banner from shared link
+(function(){
+  try{
+    const p=new URLSearchParams(location.search);
+    const r=p.get("r"), pc=parseInt(p.get("p"),10);
+    if(r && TYPES[r] && !isNaN(pc)){
+      const f=$("friend");
+      f.innerHTML=`A friend got <strong>${TYPES[r].emoji} ${TYPES[r].name}</strong>, ${Math.max(0,Math.min(100,pc))}% cooked. Your turn.`;
+      f.style.display="block";
+    }
+  }catch(e){}
+})();
+
+function startQuiz(){answers=[];idx=0;show("quiz");renderQ();}
+$("start").onclick=startQuiz;
+$("start2").onclick=startQuiz;
+
+function renderQ(){
+  locked=false;
+  const q=QUESTIONS[idx];
+  $("twist").classList.remove("show");
+  $("chip").textContent=DIMS[q.d].name;
+  $("qtext").textContent=q.q;
+  $("count").textContent=`${idx+1}/${QUESTIONS.length}`;
+  $("bar").setAttribute("aria-valuenow",idx);
+  $("bar").firstElementChild.style.width=(idx/QUESTIONS.length*100)+"%";
+  $("back").disabled=idx===0;
+  $("opts").innerHTML=q.o.map((o,i)=>`<button class="opt${answers[idx]===i?" picked":""}" data-i="${i}"><kbd>${i+1}</kbd><span>${o[0]}</span></button>`).join("");
+  $("opts").querySelectorAll(".opt").forEach(b=>b.onclick=()=>choose(+b.dataset.i));
+}
+
+function choose(i){
+  if(locked) return; locked=true;
+  answers[idx]=i;
+  $("opts").querySelectorAll(".opt").forEach(b=>b.classList.toggle("picked",+b.dataset.i===i));
+  const q=QUESTIONS[idx];
+  if(q.fact){
+    $("twistText").innerHTML=`${q.fact} <cite>(${q.cite})</cite>`;
+    $("twist").classList.add("show");
+    $("bar").firstElementChild.style.width=((idx+1)/QUESTIONS.length*100)+"%";
+    setTimeout(()=>{
+      const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+      $("twist").scrollIntoView({behavior:reduce?"auto":"smooth",block:"nearest"});
+      $("twistNext").focus({preventScroll:true});
+    },60);
+  } else {
+    setTimeout(next,260);
+  }
+}
+$("twistNext").onclick=next;
+
+function next(){
+  if(idx<QUESTIONS.length-1){ idx++; renderQ(); }
+  else finish();
+}
+$("back").onclick=()=>{ if(idx>0){ idx--; renderQ(); } };
+
+document.addEventListener("keydown",e=>{
+  if(!$("quiz").classList.contains("active")) return;
+  if($("twist").classList.contains("show") && (e.key==="Enter"||e.key===" ")){ e.preventDefault(); next(); return; }
+  const n=parseInt(e.key,10);
+  if(n>=1 && n<=QUESTIONS[idx].o.length && !locked) choose(n-1);
+  if(e.key==="ArrowLeft" && idx>0){ idx--; renderQ(); }
+});
+
+function finish(){
+  result=scoreAnswers(answers);
+  show("cooking");
+  const msgs=["Preheating your results","Checking the doneness","Plating up"];
+  let m=0; $("cookMsg").textContent=msgs[0];
+  const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const t=setInterval(()=>{m++; if(m<msgs.length) $("cookMsg").textContent=msgs[m];},700);
+  setTimeout(()=>{clearInterval(t);renderResult();},reduce?300:2100);
+}
+
+function renderResult(){
+  const {s,cooked,type}=result, T=TYPES[type];
+  $("rEmoji").textContent=T.emoji;
+  $("rName").textContent=T.name;
+  $("rTag").textContent=T.tag;
+  $("rDesc").textContent=T.desc;
+  $("rows").innerHTML=Object.keys(DIMS).map(k=>`
+    <div class="row">
+      <div class="row-top"><span>${DIMS[k].name}</span><em>${s[k]}</em></div>
+      <div class="track"><i data-w="${s[k]}" style="background:${DIMS[k].color}"></i></div>
+      <small>${DIMS[k].blurb}</small>
+    </div>`).join("");
+  const low=Math.min(...Object.values(s));
+  $("recsSub").textContent = low>=75
+    ? "You're in good shape everywhere. These come from your relatively lowest areas, to keep it that way."
+    : "Picked from your lowest areas. Small on purpose.";
+  $("recs").innerHTML=pickRecs(s).map(r=>`<div class="rec"><h3>${r.t}</h3><p>${r.a}</p><p class="why">${r.w}</p></div>`).join("");
+  const top=Object.keys(s).sort((a,b)=>s[b]-s[a])[0];
+  if(s[top]>=70){ $("keep").style.display="block"; $("keep").innerHTML=`<h3>Keep doing this</h3><p>${KEEP[top]}</p>`; }
+  else $("keep").style.display="none";
+  $("goodIntro").textContent = s.delegate<50
+    ? "You could be handing off more. These uses save time without taking the thinking away from you."
+    : "You're already doing some of this. These are the uses that save time without taking the thinking away from you.";
+  show("results");
+  // animate
+  const pct=$("rPct"), reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if(reduce){ pct.textContent=cooked+"%"; }
+  else { let v=0; const step=()=>{ v+=Math.max(1,Math.ceil((cooked-v)/12)); if(v>=cooked){v=cooked;} pct.textContent=v+"%"; if(v<cooked) requestAnimationFrame(step); }; requestAnimationFrame(step); }
+  requestAnimationFrame(()=>{
+    $("pin").style.left=cooked+"%";
+    document.querySelectorAll(".track i").forEach(i=>i.style.width=i.dataset.w+"%");
+  });
+  try{ history.replaceState(null,"",location.pathname); }catch(e){}
+  prepareCard();
+}
+
+$("again").onclick=()=>{answers=[];idx=0;show("intro");};
+
+// ================= SHARING =================
+function shareURL(){
+  const base=location.origin && location.origin!=="null" ? location.origin+location.pathname : location.href.split("?")[0];
+  return `${base}?r=${result.type}&p=${result.cooked}`;
+}
+function shareText(){
+  const T=TYPES[result.type];
+  return `I'm ${T.name} ${T.emoji}, ${result.cooked}% cooked by 2036. How cooked is your brain?`;
+}
+function toast(msg){ const t=$("toast"); t.textContent=msg; t.classList.add("show"); setTimeout(()=>t.classList.remove("show"),2200); }
+
+async function copy(text){
+  try{ await navigator.clipboard.writeText(text); return true; }
+  catch(e){
+    const ta=document.createElement("textarea"); ta.value=text; document.body.appendChild(ta); ta.select();
+    let ok=false; try{ ok=document.execCommand("copy"); }catch(_){} ta.remove(); return ok;
+  }
+}
+$("copyBtn").onclick=async()=>{ toast(await copy(shareURL())?"Link copied":"Couldn't copy. Long-press the address bar instead."); };
+
+function wrap(ctx,text,maxW){
+  const words=text.split(" "), lines=[]; let line="";
+  words.forEach(w=>{ const t=line?line+" "+w:w; if(ctx.measureText(t).width>maxW && line){lines.push(line);line=w;} else line=t; });
+  if(line) lines.push(line); return lines;
+}
+
+async function drawCard(){
+  try{ await document.fonts.ready; }catch(e){}
+  const W=1080,H=1350, c=document.createElement("canvas"); c.width=W;c.height=H;
+  const x=c.getContext("2d"), T=TYPES[result.type];
+  x.fillStyle="#1B1033"; x.fillRect(0,0,W,H);
+  const blob=(cx,cy,r,col,a)=>{ const g=x.createRadialGradient(cx,cy,0,cx,cy,r); g.addColorStop(0,col); g.addColorStop(1,"rgba(27,16,51,0)"); x.globalAlpha=a; x.fillStyle=g; x.fillRect(0,0,W,H); x.globalAlpha=1; };
+  blob(W*.9,80,620,"#FF5FA2",.55); blob(60,H-60,560,"#7B8CFF",.45); blob(W*.7,H*.55,380,"#FF8A3D",.25);
+  const heat=x.createLinearGradient(80,0,W-80,0);
+  heat.addColorStop(0,"#7B8CFF"); heat.addColorStop(.38,"#FF5FA2"); heat.addColorStop(.7,"#FF8A3D"); heat.addColorStop(1,"#FFD84D");
+  x.fillStyle="rgba(255,246,236,.75)"; x.font='600 36px "Instrument Sans", sans-serif'; x.textAlign="center";
+  x.fillText("How cooked is your brain?",W/2,130);
+  x.font='170px "Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif';
+  x.fillText(T.emoji,W/2,370);
+  x.fillStyle="#FFF6EC"; x.font='800 104px "Bricolage Grotesque", sans-serif';
+  const nameLines=wrap(x,T.name,W-140);
+  let y=nameLines.length>1?510:540; nameLines.forEach(l=>{x.fillText(l,W/2,y);y+=104;});
+  x.font='500 40px "Instrument Sans", sans-serif'; x.fillStyle="rgba(255,246,236,.85)";
+  y+=6; wrap(x,T.tag,W-200).forEach(l=>{x.fillText(l,W/2,y);y+=52;});
+  y=Math.max(y+250,960); x.fillStyle=heat; x.font='800 250px "Bricolage Grotesque", sans-serif';
+  x.fillText(result.cooked+"%",W/2,y);
+  x.fillStyle="#FFF6EC"; x.font='600 48px "Bricolage Grotesque", sans-serif';
+  x.fillText("cooked by 2036",W/2,y+75);
+  const by=y+140, bx=140, bw=W-280;
+  x.fillStyle=heat; x.beginPath(); x.roundRect(bx,by,bw,26,13); x.fill();
+  const px=bx+bw*result.cooked/100;
+  x.fillStyle="#FFF6EC"; x.strokeStyle="#1B1033"; x.lineWidth=9; x.beginPath(); x.arc(px,by+13,26,0,Math.PI*2); x.fill(); x.stroke();
+  x.fillStyle="rgba(255,246,236,.6)"; x.font='500 30px "Instrument Sans", sans-serif';
+  x.fillText((location.host||"take the test")+"  🍳",W/2,H-70);
+  return c;
+}
+// The card is drawn as soon as results appear, so Share can open instantly.
+// (Safari and some Android browsers refuse to open the share sheet if the tap was too long ago.)
+let cardBlob=null, cardPromise=null;
+function prepareCard(){
+  cardBlob=null;
+  cardPromise=drawCard().then(c=>new Promise(r=>c.toBlob(b=>{cardBlob=b;r(b);},"image/png"))).catch(()=>null);
+  return cardPromise;
+}
+async function getCard(){ return cardBlob || await cardPromise || await prepareCard(); }
+
+function downloadBlob(b,name){
+  const url=URL.createObjectURL(b), a=document.createElement("a");
+  a.href=url; a.download=name; a.rel="noopener";
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(()=>URL.revokeObjectURL(url),10000);
+}
+
+$("saveCard").onclick=async()=>{
+  const b=await getCard();
+  if(!b){ toast("Couldn't make the image in this browser."); return; }
+  const name=`brain-${result.type}.png`;
+  // On phones, the share sheet is the reliable way to save an image to Photos
+  const file=new File([b],name,{type:"image/png"});
+  const isTouch=matchMedia("(pointer: coarse)").matches;
+  if(isTouch && navigator.canShare && navigator.canShare({files:[file]})){
+    try{ await navigator.share({files:[file]}); return; }
+    catch(e){ if(e && e.name==="AbortError") return; }
+  }
+  downloadBlob(b,name); toast("Card saved");
+};
+
+$("shareBtn").onclick=async()=>{
+  const text=shareText(), url=shareURL();
+  const b=cardBlob; // use the pre-drawn card so the share sheet opens within the tap
+  if(b && navigator.canShare){
+    const file=new File([b],`brain-${result.type}.png`,{type:"image/png"});
+    if(navigator.canShare({files:[file]})){
+      try{ await navigator.share({files:[file],text:`${text} ${url}`}); return; }
+      catch(e){ if(e && e.name==="AbortError") return; }
+    }
+  }
+  if(navigator.share){
+    try{ await navigator.share({title:"How cooked is your brain?",text,url}); return; }
+    catch(e){ if(e && e.name==="AbortError") return; }
+  }
+  toast(await copy(`${text} ${url}`)?"Copied. Paste it anywhere.":"Couldn't share from this browser. Try Copy link.");
+};
+</script>
+</body>
+</html>
