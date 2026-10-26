@@ -184,16 +184,14 @@ section.block .sub{color:var(--muted);margin:0 0 20px;font-size:15.5px}
 .track i{display:block;height:100%;width:0;border-radius:999px;transition:width 1s cubic-bezier(.2,.8,.2,1)}
 .row small{display:block;color:var(--muted);font-size:13.5px;margin-top:6px}
 .recs{display:grid;gap:14px}
-.rec{background:var(--ink-2);border-radius:var(--r-md);padding:20px 22px;border-left:5px solid var(--pink)}
-.rec h3{font-family:var(--display);font-size:21px;margin:0 0 6px;letter-spacing:-.01em}
-.rec p{margin:0 0 10px}
-.rec .why{font-size:14.5px;color:var(--muted);margin:0}
+.rec{background:var(--ink-2);border-radius:var(--r-md);padding:18px 20px;display:flex;gap:16px;align-items:flex-start}
+.rec-emoji{font-size:30px;line-height:1;flex:none;width:52px;height:52px;border-radius:16px;background:var(--ink-3);display:grid;place-items:center}
+.rec h3{font-family:var(--display);font-size:20px;margin:2px 0 4px;letter-spacing:-.01em}
+.rec p{margin:0 0 6px}
+.rec .why{font-size:14px;color:var(--muted);margin:0}
 .keep{background:var(--paper);color:var(--ink);border-radius:var(--r-md);padding:20px 22px;margin-top:14px}
 .keep h3{font-family:var(--display);font-size:20px;margin:0 0 4px}
 .keep p{margin:0}
-.good{list-style:none;padding:0;margin:0;display:grid;gap:10px}
-.good li{display:flex;gap:12px;align-items:flex-start;background:var(--ink-2);border-radius:var(--r-sm);padding:14px 16px}
-.good li span:first-child{font-size:22px;line-height:1.1}
 .share{background:var(--heat);color:var(--ink);border-radius:var(--r-lg);padding:28px 24px;text-align:center}
 .share h2{color:var(--ink)}
 .share p{margin:0 0 18px}
@@ -262,6 +260,10 @@ footer a{color:var(--paper);text-underline-offset:3px}
       <div id="refsIntro"></div>
       <div class="center"><button class="cta cta-small" id="start2">Start the test</button></div>
     </div>
+    <footer>
+      <span>Your answers never leave this page.</span>
+      <span class="credit">© 2026 Camilla Balbis · <a href="https://www.linkedin.com/in/camillabalbis/" target="_blank" rel="noopener">LinkedIn</a></span>
+    </footer>
   </section>
 
   <!-- ================= QUIZ ================= -->
@@ -318,18 +320,6 @@ footer a{color:var(--paper);text-underline-offset:3px}
       <div class="keep" id="keep"></div>
     </section>
 
-    <section class="block">
-      <h2>AI that's actually good for your brain</h2>
-      <p class="sub" id="goodIntro"></p>
-      <ul class="good">
-        <li><span aria-hidden="true">🧮</span><span>Math and money stuff beyond you. Let it calculate, then check the answer is roughly the size you expected.</span></li>
-        <li><span aria-hidden="true">✈️</span><span>Comparing options you'd never tabulate yourself: flights, plans, phone contracts. You still make the call.</span></li>
-        <li><span aria-hidden="true">📎</span><span>Admin and formatting. Hand it off and spend the attention on something that stretches you.</span></li>
-        <li><span aria-hidden="true">🎓</span><span>A tutor, not an answer key. Ask it to quiz you, give hints, or explain why.</span></li>
-        <li><span aria-hidden="true">🥊</span><span>A sparring partner after you've formed your own view. Ask it to argue the other side.</span></li>
-      </ul>
-    </section>
-
     <section class="block share">
       <h2>Share your doneness</h2>
       <p>Send it to the friend who asks ChatGPT what to text back.</p>
@@ -360,10 +350,6 @@ footer a{color:var(--paper);text-underline-offset:3px}
     <button class="again" id="again">Take it again</button>
   </section>
 
-  <footer>
-    <span>Your answers never leave this page.</span>
-    <span class="credit">© 2026 Camilla Balbis · <a href="https://www.linkedin.com/in/YOUR-LINKEDIN-HANDLE/" target="_blank" rel="noopener">LinkedIn</a></span>
-  </footer>
 </main>
 
 <div class="toast" id="toast" role="status"></div>
@@ -526,28 +512,28 @@ const TYPES = {
 
 const RECS = {
   think: [
-    {t:"Think first, prompt second", a:"Before you open a chat, spend five minutes on your own rough answer, draft or plan. Then bring in AI to improve it.", w:"In MIT's essay study, people who wrote unaided first and then got AI showed more brain engagement than those who started with AI. Small, not yet peer reviewed, but it matches decades of work showing that what you generate yourself sticks."},
-    {t:"Ask for hints, not answers", a:"Add \"don't give me the answer, give me a hint\" to your prompt when you're working something out.", w:"In a trial with nearly 1,000 students, a ChatGPT version that gave hints instead of answers largely avoided the learning loss seen with the regular version (Bastani et al., 2025)."}
+    {e:"✍️", t:"Think first, prompt second", a:"Jot down your own answer or plan before you open a chat. Then let AI improve it.", w:"Writing first, then using AI, kept people more engaged (MIT, 2025)."},
+    {e:"💡", t:"Ask for hints, not answers", a:"Add \"give me a hint, not the answer\" to your prompt.", w:"Hint-only AI largely avoided the learning loss in a 1,000-student trial (Bastani et al., 2025)."}
   ],
   check: [
-    {t:"The two-source rule", a:"For anything that matters (health, money, something you'll repeat to others), check one source that isn't the AI.", w:"People who trust AI more report doing less critical thinking when they use it (Lee et al., 2025). A quick second check keeps that habit alive."},
-    {t:"Catch it out once a week", a:"Ask \"what might be wrong with this?\" after an answer you rely on. Keep a little tally of what you catch.", w:"Fluent answers feel correct. Actively looking for errors is how you stay the editor rather than the audience."}
+    {e:"🔍", t:"The two-source rule", a:"If it matters, check one source that isn't AI.", w:"The more people trust AI, the less they check it (Lee et al., 2025)."},
+    {e:"🕵️", t:"Catch it out", a:"Once a week, ask AI \"what might be wrong with this?\" about an answer you relied on.", w:"Hunting for errors keeps you the editor, not the audience."}
   ],
   memory: [
-    {t:"GPS there, brain back", a:"Use maps on the way somewhere, then try the way back without them.", w:"This is the tip from Bohbot, whose study linked heavy GPS use to steeper decline in spatial memory over three years (Dahmani & Bohbot, 2020). Getting a little lost is part of the workout."},
-    {t:"Tell someone one thing", a:"Once a day, explain something you read or learned to someone, out loud, without looking it up.", w:"Pulling information back out of your head is one of the best-replicated ways to keep it there (Roediger & Karpicke, 2006)."}
+    {e:"🧭", t:"GPS there, brain back", a:"Use maps on the way somewhere. Find your way back without them.", w:"Heavy GPS use is linked to faster spatial memory decline (Dahmani & Bohbot, 2020)."},
+    {e:"🗣️", t:"Tell someone one thing", a:"Explain one thing you learned today to someone, from memory.", w:"Recalling something beats rereading it (Roediger & Karpicke, 2006)."}
   ],
   delegate: [
-    {t:"Hand off the boring bits", a:"Pick one tedious task this week (formatting, a comparison table, a template email) and let AI do the first pass.", w:"Effort that's just friction doesn't build skill (cognitive load theory). Using AI to support your work, rather than replace your thinking, wasn't linked to the downsides (Zhu et al., 2026)."},
-    {t:"Turn AI into a tutor", a:"Next time you learn something, ask it to quiz you or explain why, instead of just giving you the result.", w:"In Anthropic's 2026 trial, people who asked AI conceptual questions kept far more of what they learned than people who just took its output."}
+    {e:"📎", t:"Hand off one boring task", a:"Let AI do the first pass on a chore: formatting, a comparison, a template email.", w:"Using AI to support you, not think for you, isn't linked to the downsides (Zhu et al., 2026)."},
+    {e:"🎓", t:"Make AI your tutor", a:"When you're learning, ask it to quiz you or explain why.", w:"People who asked AI conceptual questions remembered more (Anthropic, 2026)."}
   ],
   reserve: [
-    {t:"Start one hard, new thing", a:"Pick something you're bad at and do 20 minutes of it a few times this week. An instrument, a language, a craft.", w:"Learning demanding new skills improved memory more than easy or social activities in the Synapse Project (Park et al., 2014)."},
-    {t:"Move, and see people", a:"Turn one call into a walk. Or one text thread into coffee.", w:"Physical inactivity and social isolation are both among the 14 modifiable dementia risk factors in the 2024 Lancet Commission, which estimates around 45% of cases could in theory be prevented or delayed."}
+    {e:"🎸", t:"Start one hard, new thing", a:"20 minutes, three times this week, on something you're bad at.", w:"Learning demanding new skills improved memory (Park et al., 2014)."},
+    {e:"🚶", t:"Walk and talk", a:"Turn one call into a walk, or one text thread into a coffee.", w:"Inactivity and isolation are both dementia risk factors (Lancet Commission, 2024)."}
   ],
   aware: [
-    {t:"Decide before you delegate", a:"Before you ask AI, give yourself one second: do I want to learn this, or just get it done? If learn, struggle for ten minutes first.", w:"Effort that feels hard in the moment often makes learning stick (\"desirable difficulties\"). It only works if you choose it on purpose."},
-    {t:"The closed-laptop check", a:"After AI helps you, close it and try to redo or explain the thing yourself.", w:"AI users in one study did better on reasoning tasks but overestimated how well they did, and people with more AI know-how were worse at judging themselves (Fernandes et al., 2026). This check recalibrates you."}
+    {e:"⏰", t:"Decide before you delegate", a:"Before asking AI, decide: learn this, or just get it done? If learn, give it 10 minutes first.", w:"Effort you choose is what makes learning stick."},
+    {e:"💻", t:"The closed-laptop check", a:"After AI helps, close it and redo the thing yourself.", w:"AI users tend to overestimate how well they did (Fernandes et al., 2026)."}
   ]
 };
 
@@ -762,13 +748,10 @@ function renderResult(){
   $("recsSub").textContent = low>=75
     ? "You're in good shape everywhere. These come from your relatively lowest areas, to keep it that way."
     : "Picked from your lowest areas. Small on purpose.";
-  $("recs").innerHTML=pickRecs(s,answers).map(r=>`<div class="rec"><h3>${r.t}</h3><p>${r.a}</p><p class="why">${r.w}</p></div>`).join("");
+  $("recs").innerHTML=pickRecs(s,answers).map(r=>`<div class="rec"><span class="rec-emoji" aria-hidden="true">${r.e}</span><div><h3>${r.t}</h3><p>${r.a}</p><p class="why">${r.w}</p></div></div>`).join("");
   const top=Object.keys(s).sort((a,b)=>s[b]-s[a])[0];
   if(s[top]>=70){ $("keep").style.display="block"; $("keep").innerHTML=`<h3>Keep doing this</h3><p>${KEEP[top]}</p>`; }
   else $("keep").style.display="none";
-  $("goodIntro").textContent = s.delegate<50
-    ? "You could be handing off more. These uses save time without taking the thinking away from you."
-    : "You're already doing some of this. These are the uses that save time without taking the thinking away from you.";
   show("results");
   // animate
   const pct=$("rPct"), reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
