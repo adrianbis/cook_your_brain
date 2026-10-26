@@ -114,6 +114,7 @@ a{color:var(--butter)}
 details .refgroup h3{font-size:16px}
 details .refs li{background:var(--ink-3)}
 .cta-small{margin-top:30px;padding:14px 26px;font-size:17px}
+.center{text-align:center}
 
 /* ---------- quiz ---------- */
 .qtop{display:flex;align-items:center;gap:14px;margin:4px 0 6vh}
@@ -210,7 +211,9 @@ details p,details li{color:var(--muted);font-size:15px}
 details ol{padding-left:20px;margin:0 0 18px}
 details li{margin-bottom:8px}
 .again{display:block;margin:44px auto 0;background:none;border:1.5px solid var(--faint);border-radius:999px;padding:14px 26px;font-weight:600}
-footer{color:var(--muted);font-size:13.5px;text-align:center;margin-top:60px}
+footer{color:var(--muted);font-size:13.5px;margin-top:60px;padding-top:20px;border-top:1px solid var(--faint);display:flex;justify-content:space-between;align-items:center;gap:8px 20px;flex-wrap:wrap}
+footer .credit{margin-left:auto}
+footer a{color:var(--paper);text-underline-offset:3px}
 
 @media (max-width:520px){
   body{font-size:16px}
@@ -236,7 +239,7 @@ footer{color:var(--muted);font-size:13.5px;text-align:center;margin-top:60px}
       <span class="sticker s1" aria-hidden="true">🧠</span>
       <span class="sticker s2" aria-hidden="true">🔥</span>
       <h1 id="h1">How cooked is your brain?</h1>
-      <p class="lede">A test of your everyday habits and how you use AI. <span>Not whether you use it. Whether it's quietly using up your thinking.</span></p>
+      <p class="lede">A test of your everyday habits and how you use AI.</p>
       <button class="cta" id="start">Start the test</button>
       <ul class="facts">
         <li>No sign-up</li>
@@ -247,6 +250,7 @@ footer{color:var(--muted);font-size:13.5px;text-align:center;margin-top:60px}
 
     <div class="how">
       <h2>What it measures</h2>
+      <p>This is a personal project to help you check yourself for over-reliance on AI and what researchers call <em>human enfeeblement</em>: slowly losing abilities we stop using because a machine does them for us. Nobody notices it happening, which is the point of checking.</p>
       <p>Researchers increasingly find that what matters is how you use AI, not how much. Letting it do your thinking is linked to weaker independent thinking. Using it to support your thinking, or to take over tedious stuff you'd never learn from anyway, isn't. This test rewards the second kind.</p>
       <p>It also looks past AI, at the everyday habits linked to long-term brain health: learning new things, focus, movement and people.</p>
       <div class="dims" id="dimlist"></div>
@@ -256,7 +260,7 @@ footer{color:var(--muted);font-size:13.5px;text-align:center;margin-top:60px}
       <h2>Read the research</h2>
       <p>Everything in this test is built on the work below. Most of the AI research is new, and several studies are small or correlational, so the notes say how much weight each one can carry.</p>
       <div id="refsIntro"></div>
-      <button class="cta cta-small" id="start2">Start the test</button>
+      <div class="center"><button class="cta cta-small" id="start2">Start the test</button></div>
     </div>
   </section>
 
@@ -297,7 +301,7 @@ footer{color:var(--muted);font-size:13.5px;text-align:center;margin-top:60px}
       <div class="pct"><b id="rPct">0%</b><span>cooked by 2036</span></div>
       <div class="thermo" aria-hidden="true"><div class="pin" id="pin"></div></div>
       <div class="ticks" aria-hidden="true"><span>Fresh</span><span>Toasted</span><span>Medium</span><span>Well done</span><span>Charcoal</span></div>
-      <p class="disclaim">The 2036 bit is a joke. No study can forecast your brain in ten years. The score reflects how your current habits line up with what research links to sharper or duller thinking.</p>
+      <p class="disclaim">The 2036 bit is a joke. No study can forecast your brain in ten years. The score reflects how your current habits line up with what research links to sharper or duller thinking. (This is a way to check your own AI use and reliance habits. It doesn't diagnose anything. Some health and neurological differences can shape how people answer questions about focus, memory or getting around, so read your score as a ballpark, give or take 10 to 20 points.)</p>
     </div>
     <p class="desc" id="rDesc"></p>
 
@@ -340,12 +344,12 @@ footer{color:var(--muted);font-size:13.5px;text-align:center;margin-top:60px}
       <h2>The fine print</h2>
       <details>
         <summary>What this test is, and isn't</summary>
-        <p>This is a self-reflection quiz, not a validated psychological instrument or a medical test. Questions and scoring are built from published research, but the test itself hasn't been validated. Most of the AI research is recent, many studies are correlational, and some are small or not yet peer reviewed. Treat your result as a mirror, not a diagnosis.</p>
+        <p>This is a self-reflection quiz, not a validated psychological instrument or a medical test. Questions and scoring are built from published research, but the test itself hasn't been validated. Most of the AI research is recent, many studies are correlational, and some are small or not yet peer reviewed. Treat your result as a mirror, not a diagnosis. Some health and neurological differences affect focus, memory and navigation in ways this quiz can't tell apart from habits, so your score could sit 10 to 20 points off for reasons that have nothing to do with AI.</p>
         <p>If you're genuinely worried about your memory or thinking, talk to a doctor. That's a different conversation from this quiz.</p>
       </details>
       <details>
         <summary>How scoring works</summary>
-        <p>Each question scores one of six areas from 0 to 100. Your "cooked" percentage is a weighted average of those areas, flipped so that higher means more cooked. Thinking first, fact-checking and brain reserve count most. Smart delegation counts least, since doing boring tasks by hand costs you time more than brain. Your type comes from your pattern across areas, not your total alone. Answers like "I don't use AI" are left out of the scoring rather than counted against you.</p>
+        <p>Each question scores one of six areas from 0 to 100. Your "cooked" percentage is a weighted average of those areas, flipped so that higher means more cooked. Thinking first, fact-checking and brain reserve count most. Smart delegation counts least, since doing boring tasks by hand costs you time more than brain. Your type comes from your pattern across areas, not your total alone. Answers like "I don't use AI" or "spatial awareness is not my forte" are left out of the scoring rather than counted against you.</p>
       </details>
       <details>
         <summary>The research behind it</summary>
@@ -356,7 +360,10 @@ footer{color:var(--muted);font-size:13.5px;text-align:center;margin-top:60px}
     <button class="again" id="again">Take it again</button>
   </section>
 
-  <footer>Made as a small project on human enfeeblement. Your answers never leave this page.</footer>
+  <footer>
+    <span>Your answers never leave this page.</span>
+    <span class="credit">© 2026 Camilla Balbis · <a href="https://www.linkedin.com/in/YOUR-LINKEDIN-HANDLE/" target="_blank" rel="noopener">LinkedIn</a></span>
+  </footer>
 </main>
 
 <div class="toast" id="toast" role="status"></div>
@@ -398,7 +405,8 @@ const QUESTIONS = [
   {d:"memory", q:"You're heading somewhere you've been at least three times before.", o:[
     ["Maps on, eyes on the blue dot, every time",0],
     ["Maps on for traffic, but I know the way",3],
-    ["No maps. I've got this.",4]]},
+    ["No maps. I've got this.",4],
+    ["I'd need a map in my own house. Spatial awareness is not my forte.",null]]},
   {d:"aware", q:"A problem gets hard. How long before you ask AI or Google?", o:[
     ["Instantly. Why suffer?",0],
     ["I give it a real go first",4],
@@ -429,7 +437,8 @@ const QUESTIONS = [
   {d:"memory", q:"First day in a new city.", o:[
     ["Follow the blue dot. Couldn't point to my hotel after.",0],
     ["Check the map, then try to navigate by landmarks",4],
-    ["Wander, get lost, call it an adventure",3]]},
+    ["Wander, get lost, call it an adventure",3],
+    ["I'd need a map in my own house. Spatial awareness is not my forte.",null]]},
   {d:"aware", q:"After AI helps you with something, could you do it again without it?", o:[
     ["Usually, yes",4],
     ["Sometimes",2],
@@ -580,13 +589,16 @@ function pickType(s,cooked){
   return "line-cook";
 }
 
-function pickRecs(s){
+function pickRecs(s,answers){
+  // If someone said spatial navigation isn't their thing, swap the GPS tip for the memory one
+  const noMaps=(answers||[]).some((a,i)=>a!=null && /Spatial awareness/.test(QUESTIONS[i].o[a][0]));
+  const R=noMaps?{...RECS,memory:[RECS.memory[1],RECS.memory[1]]}:RECS;
   const order=Object.keys(s).sort((a,b)=>s[a]-s[b]);
   const out=[];
   // lowest dimension gets its two recs if it's well below the next; otherwise one each from the lowest three
   const gap=s[order[1]]-s[order[0]];
-  if(gap>=25){ out.push(RECS[order[0]][0],RECS[order[0]][1],RECS[order[1]][0]); }
-  else { out.push(RECS[order[0]][0],RECS[order[1]][0],RECS[order[2]][0]); }
+  if(gap>=25 && R[order[0]][0]!==R[order[0]][1]){ out.push(R[order[0]][0],R[order[0]][1],R[order[1]][0]); }
+  else { out.push(R[order[0]][0],R[order[1]][0],R[order[2]][0]); }
   return out.map((r,i)=>({...r}));
 }
 /*LOGIC-END*/
@@ -750,7 +762,7 @@ function renderResult(){
   $("recsSub").textContent = low>=75
     ? "You're in good shape everywhere. These come from your relatively lowest areas, to keep it that way."
     : "Picked from your lowest areas. Small on purpose.";
-  $("recs").innerHTML=pickRecs(s).map(r=>`<div class="rec"><h3>${r.t}</h3><p>${r.a}</p><p class="why">${r.w}</p></div>`).join("");
+  $("recs").innerHTML=pickRecs(s,answers).map(r=>`<div class="rec"><h3>${r.t}</h3><p>${r.a}</p><p class="why">${r.w}</p></div>`).join("");
   const top=Object.keys(s).sort((a,b)=>s[b]-s[a])[0];
   if(s[top]>=70){ $("keep").style.display="block"; $("keep").innerHTML=`<h3>Keep doing this</h3><p>${KEEP[top]}</p>`; }
   else $("keep").style.display="none";
